@@ -9,7 +9,6 @@ import (
 
 // Instruction in an assembly file.
 type Instruction struct {
-	Raw    string
 	Error  error
 	Opcode string
 	Args   []string
@@ -51,7 +50,6 @@ func ParseAssembly(r io.Reader) ([]Instruction, error) {
 		}
 
 		inst := Instruction{
-			Raw:  line,
 			Line: linenum,
 		}
 		parts := strings.Fields(line)
