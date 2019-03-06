@@ -1,0 +1,8 @@
+#!/bin/bash -ex
+
+mkdir -p targets
+rm -rf targets/*
+
+git clone https://github.com/jeremywohl/nacl targets/jeremywohl-nacl
+git clone https://github.com/floodyberry/supercop targets/floodyberry-supercop
+git clone https://github.com/jedisct1/libsodium targets/jedisct1-libsodium
