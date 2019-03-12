@@ -2,7 +2,14 @@
 
 mkdir -p targets
 rm -rf targets/*
+cd targets
 
-git clone https://github.com/jeremywohl/nacl targets/jeremywohl-nacl
-git clone https://github.com/floodyberry/supercop targets/floodyberry-supercop
-git clone https://github.com/jedisct1/libsodium targets/jedisct1-libsodium
+git clone https://github.com/jeremywohl/nacl jeremywohl-nacl
+git clone https://github.com/floodyberry/supercop floodyberry-supercop
+git clone https://github.com/jedisct1/libsodium jedisct1-libsodium
+
+wget 'https://bench.cr.yp.to/supercop/supercop-20190110.tar.xz'
+tar xf supercop-20190110.tar.xz
+
+wget 'https://hyperelliptic.org/nacl/nacl-20110221.tar.bz2'
+tar xf nacl-20110221.tar.bz2
