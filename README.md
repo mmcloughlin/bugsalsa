@@ -1,5 +1,13 @@
 # bugsalsa
-Investigating a 32-bit overflow bug in SUPERCOP-derived salsa20 implementations
+Investigating a 32-bit overflow bug in SUPERCOP-derived salsa20 implementations.
+
+## Background
+
+[cryptofuzz](https://github.com/mmcloughlin/cryptofuzz) revealed a vulnerability in the Go `x/crypto` implementation of salsa20. A misimplementation of the counter increment in assembly causes the counter to cycle shortly after `2^32` blocks.
+
+Since the asssembly version was ported directly from SUPERCOP, it seemed probable that the bug was also present in the upstream and other derived libraries. This repository contains some adhoc code used to test whether the bug is also present in NaCL and libsodium.
+
+The bug was [fixed by the Golang team](https://groups.google.com/forum/#!topic/golang-dev/1X7VG7FDw2A) on March 20, 2019. It is now clear that the bug was known by others some years ago; it was patched in libsodium, but an empty file called `warning-256gb` was deemed sufficient for SUPERCOP and no action was taken to NaCL.
 
 ## Environment
 
@@ -9,7 +17,9 @@ Tested on Ubuntu 18.04 with
 sudo apt-get install libnacl-dev libsodium-dev
 ```
 
-## NaCL and libsodium
+Note that these tests will allocate over 256 GiB of memory!
+
+## NaCL and libsodium Comparison
 
 The `test.c` program was compiled against NaCL and libsodium and run to produce
 two keyfiles. Comparing them we see a difference shortly after 256 GiB:
